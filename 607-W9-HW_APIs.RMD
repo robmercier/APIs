@@ -1,0 +1,62 @@
+---
+title: "Homework Week 9 - NYT APIs"
+author: "Robert_M"
+date: "October 28, 2018"
+output: 
+  html_document:
+    theme: cerulean
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Assignment - New York Times APIs {.tabset .tabset-pills}
+
+The New York Times web site provides a rich set of APIs, as described here: [http://developer.nytimes.com/docs] http://developer.nytimes.com/docs
+You'll need to start by signing up for an API key.  Your task is to choose one of the New York Times APIs, construct an interface in R to read in the JSON data, and transform it to an R dataframe.
+
+# Load packages/libraries 
+```{r}
+library(jsonlite)
+library(httr)
+library(RCurl)
+```
+
+
+## Reading in movie review API
+```{r}
+url <- GET("https://api.nytimes.com/svc/movies/v2/reviews/search.json", query = list(api_key = "e6151b6f4d364acf8d6e5d8af9ef7072"))
+url
+
+APIMovie <- fromJSON("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=e6151b6f4d364acf8d6e5d8af9ef7072") 
+APIMovie_table <- as.data.frame(APIMovie)
+APIMovie_table
+```
+
+## Reading in article search API
+```{r}
+url <- GET("https://api.nytimes.com/svc/search/v2/articlesearch.json", query = list(api_key = "e6151b6f4d364acf8d6e5d8af9ef7072"))
+url
+
+APIArticle <- fromJSON("https://api.nytimes.com/svc/search/v2/articlesearch.json?api_key=e6151b6f4d364acf8d6e5d8af9ef7072") 
+APIArticle_table <- as.data.frame(APIArticle)
+APIArticle_table
+```
+
+## Reading in top stories API
+```{r}
+url <- GET("http://api.nytimes.com/svc/topstories/v2/home.json", query = list(api_key = "e6151b6f4d364acf8d6e5d8af9ef7072"))
+url
+
+APITopStories <- fromJSON("http://api.nytimes.com/svc/topstories/v2/home.json?api_key=e6151b6f4d364acf8d6e5d8af9ef7072") 
+APITopStories_table <- as.data.frame(APITopStories)
+APITopStories_table
+```
+
+```{r}
+
+```
+
